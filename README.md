@@ -16,3 +16,7 @@
 #### 5) Consulte as 3 ordens geradas
 
 
+### Informações usadas para os testes
+
+
+![tabela](https://user-images.githubusercontent.com/50639601/83956778-098b9900-a838-11ea-8d31-a3a874f84f2a.jpg)
