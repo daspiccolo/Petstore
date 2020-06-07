@@ -534,5 +534,38 @@ public class PetStoreTest {
                 .statusCode(200)
                 .body("message", Matchers.containsString("ok"));
     }
+    @Test
+    @Order(25)
+    public void consultaPetPorStatus_Available() {
+        RestAssured
+                .given()
+                .when()
+                      .get("pet/findByStatus?status=available")
+                .then()
+                    .assertThat()
+                          .statusCode(200);
+    }
+    @Test
+    @Order(26)
+    public void consultaPetPorStatus_Sold() {
+        RestAssured
+                .given()
+                .when()
+                      .get("pet/findByStatus?status=sold")
+                .then()
+                      .assertThat()
+                        .statusCode(200);
+    }
+    @Test
+    @Order(27)
+    public void consultaPetPorStatus_Pending() {
+        RestAssured
+                .given()
+                .when()
+                     .get("pet/findByStatus?status=pending")
+                .then()
+                    .assertThat()
+                        .statusCode(200);
+    }
 }
 
