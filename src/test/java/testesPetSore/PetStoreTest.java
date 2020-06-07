@@ -307,6 +307,7 @@ public class PetStoreTest {
 
     /*
      *  5) Consulte as 3 ordens geradas
+     * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
      */
 
     @Test
@@ -361,7 +362,7 @@ public class PetStoreTest {
                 .given()
                     .contentType(ContentType.JSON)
                     .body("   {\n" +
-                            "    \"id\": 504,\n" +
+                            "    \"id\": 4,\n" +
                             "    \"username\": \"debora\",\n" +
                             "    \"firstName\": \"Debora\",\n" +
                             "    \"lastName\": \"Teste\",\n" +
@@ -376,7 +377,7 @@ public class PetStoreTest {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body("message", Matchers.equalTo("504"));
+                .body("message", Matchers.equalTo("4"));
     }
 
 
@@ -390,7 +391,7 @@ public class PetStoreTest {
                 .then()
                     .assertThat()
                     .statusCode(200)
-                    .body("id", Matchers.equalTo(504))
+                    .body("id", Matchers.equalTo(4))
                     .body("username", Matchers.equalTo("debora"));
 
     }
@@ -502,10 +503,36 @@ public class PetStoreTest {
         RestAssured
                 .given()
                 .when()
-                     .delete("pet/212")
+                     .delete("pet/2012")
                 .then()
                     .assertThat()
                     .statusCode(404);
+    }
+    @Test
+    @Order(23)
+    public void loginUsuario() {
+        RestAssured
+                .given()
+                .when()
+                     .get("/user/login?username=rodrigo_mendes&password=rodrigo")
+
+                .then()
+                    .assertThat()
+                    .statusCode(200)
+                    .body("message", Matchers.containsString("logged in user session:"));
+    }
+    @Test
+    @Order(24)
+    public void logoutUsuario() {
+        RestAssured
+                .given()
+                .when()
+                .get("/user/logout")
+
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("message", Matchers.containsString("ok"));
     }
 }
 
